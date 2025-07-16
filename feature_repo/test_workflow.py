@@ -81,6 +81,9 @@ def fetch_historical_features_entity_df(store: FeatureStore, for_batch_scoring: 
     if for_batch_scoring:
         entity_df["event_timestamp"] = pd.to_datetime("now", utc=True)
 
+    print("\n--- Entity DataFrame ---")
+    print(entity_df)
+
     training_df = store.get_historical_features(
         entity_df=entity_df,
         features=[
@@ -110,6 +113,7 @@ def fetch_online_features(store, source: str = ""):
     ]
     if source == "feature_service":
         features_to_fetch = store.get_feature_service("driver_activity_v1")
+        print("11")
     elif source == "push":
         features_to_fetch = store.get_feature_service("driver_activity_v3")
     else:
